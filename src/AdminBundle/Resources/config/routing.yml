@@ -1,0 +1,87 @@
+admin_homepage:
+    path:     /jdc/online/ordering/system/login
+    defaults: { _controller: AdminBundle:Default:index }
+
+admin_login:
+    path:     /jdc/online/ordering/system/home
+    defaults: { _controller: AdminBundle:Default:login}
+
+admin_logout:
+    path:     /jdc/online/ordering/system/logout
+    defaults: { _controller: AdminBundle:Default:logout}
+
+admin_consigner:
+    path:     /jdc/online/ordering/system/consigner
+    defaults: { _controller: AdminBundle:Consigner:consigner}
+
+admin_consigner_edit_show:
+    path:     /jdc/online/ordering/system/consigner/edit/show/{id}
+    defaults: { _controller: AdminBundle:Consigner:consignerEditShow}
+
+admin_consigner_edit:
+    path:     /jdc/online/ordering/system/consigner/edit/{id}
+    defaults: { _controller: AdminBundle:Consigner:consignerEdit}
+
+admin_consigner_delete:
+    path:     /jdc/online/ordering/system/consigner/delete/{id}
+    defaults: { _controller: AdminBundle:Consigner:consignerDelete}
+
+admin_register:
+    path:     /jdc/online/ordering/system/register
+    defaults: { _controller: AdminBundle:Register:register}
+
+admin_profile:
+    path:     /jdc/online/ordering/system/profile/{id}
+    defaults: { _controller: AdminBundle:Profile:profile}
+
+admin_profile_edit:
+    path:     /jdc/online/ordering/system/profile/edit/{id}
+    defaults: { _controller: AdminBundle:Profile:profileEdit}
+
+admin_client:
+    path:     /jdc/online/ordering/system/client
+    defaults: { _controller: AdminBundle:Client:client}
+
+admin_client_edit_show:
+    path:     /jdc/online/ordering/system/client/edit/show/{id}
+    defaults: { _controller: AdminBundle:Client:clientEditShow}
+
+admin_client_edit:
+    path:     /jdc/online/ordering/system/client/edit/{id}
+    defaults: { _controller: AdminBundle:Client:clientEdit}
+
+admin_client_delete:
+    path:     /jdc/online/ordering/system/client/delete/{id}
+    defaults: { _controller: AdminBundle:Client:clientDelete}
+
+admin_slider_show:
+    path:     /jdc/online/ordering/system/slider
+    defaults: { _controller: AdminBundle:Slider:slideUpload}
+
+admin_slider_update:
+    path:     /jdc/online/ordering/system/slider/update/{id}
+    defaults: { _controller: AdminBundle:Slider:slideActive}
+
+admin_slider_small_show:
+    path:     /jdc/online/ordering/system/slider/small
+    defaults: { _controller: AdminBundle:SmallSlider:smallSliderShow}
+
+admin_slider_small_update:
+    path:     /jdc/online/ordering/system/slider/small/update/{id}
+    defaults: { _controller: AdminBundle:SmallSlider:smallSliderActive}
+
+admin_menu_show:
+    path:     /jdc/online/ordering/system/menu
+    defaults: { _controller: AdminBundle:Menu:menu}
+
+admin_menu_update:
+    path:     /jdc/online/ordering/system/menu/{id}
+    defaults: { _controller: AdminBundle:Menu:menuUpdate}
+
+admin_menu_sub_update:
+    path:     /jdc/online/ordering/system/menu/sub/{id}
+    defaults: { _controller: AdminBundle:Menu:subMenuUpdate}
+
+admin_menu_sub_show:
+    path:     /jdc/online/ordering/system/menu/sub/show/{id}
+    defaults: { _controller: AdminBundle:Menu:subMenuShow}

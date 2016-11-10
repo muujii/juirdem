@@ -1,0 +1,93 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <h3>Меню бүртгэл</h3>
+                <hr class="star-light">
+            </div>
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#menu1">Parent menu үүсгэх</a></li>
+                <li><a data-toggle="tab" href="#menu2">Sub menu үүсгэх</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <p>
+                        {{ form_start(form) }}
+                        {{ form_widget(form.labelMN) }}
+                        {{ form_widget(form.link) }}
+                        {{ form_widget(form.submit) }}
+                        {{ form_end(form) }}
+                    </p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <p>
+                        {{ form_start(subForm) }}
+                        {{ form_widget(subForm.labelMN) }}
+                        {{ form_widget(subForm.parentID) }}
+                        {{ form_widget(subForm.link) }}
+                        {{ form_widget(subForm.submit) }}
+                        {{ form_end(subForm) }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            <h3>Меню жагсаалт</h3>
+            <hr>
+            {% for parentMenu in parentMenus %}
+                <form action="{{ path('admin_menu_update',{'id':parentMenu.id }) }}" method="post">
+                    <div class="col-md-10" style="padding: 0">
+                        <ul class="nav nav-stacked" id="accordion1">
+                            <li class="panel">
+                                <a data-toggle="collapse" data-parent="#accordion1" href="#{{ parentMenu.id }}"
+                                   style="height: 30px;">
+                                    <label>{{ parentMenu.labelMN }}</label>
+                                </a>
+                                <ul id="{{ parentMenu.id }}" class="collapse list-unstyled">
+                                    {% for subMenu in subMenus %}
+                                        {% if parentMenu.id == subMenu.parentID %}
+                                            <ul style="height: 30px;margin-top: 10px;margin-bottom: 10px;">
+                                                <div class="col-md-3" style="padding: 0">
+                                                    <input type="text" placeholder="Sub menu нэр"
+                                                           class="form-control" name="name" id="name"
+                                                           value="{{ subMenu.labelMN }}" disabled>
+                                                </div>
+                                                <div class="col-md-7" style="padding: 0">
+                                                    <input type="text" placeholder="Холбоос" class="form-control"
+                                                           name="link" id="link"
+                                                           value="{{ subMenu.link }}" disabled>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="{{ path('admin_menu_sub_show', {'id': subMenu.id }) }}"
+                                                       class="glyphicon glyphicon-pencil btn btn-primary btn-block"></a>
+                                                </div>
+                                            </ul>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-1" style="padding-right: 0">
+                        <select class="form-control" id="parentActive" name="parentActive" style="padding: 0"
+                                form="parentForm">
+                            <option value="1" {% if parentMenu.active == '1' %} selected="selected" {% endif %}>
+                                Идэвхтэй
+                            </option>
+                            <option value="0" {% if parentMenu.active == '0' %} selected="selected" {% endif %}>
+                                Идэхгүй
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-1" style="padding-right: 0">
+                        <input type="submit" class="btn btn-primary btn-block" value="Засах" id="parent" name="parent">
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

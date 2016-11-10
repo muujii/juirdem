@@ -1,0 +1,78 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <h3>Жижиг slide зураг оруулах</h3>
+            </div>
+            <hr class="star-light">
+        </div>
+        <div class="row" style="margin-top: 30px;">
+            {{ form_start(form) }}
+            <div class="col-md-4">
+                {{ form_widget(form.titleMN) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_widget(form.file, { 'id': 'file','name':'file'}) }}
+            </div>
+            <div class="col-md-2">
+                {{ form_widget(form.submit) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Д/д</th>
+                    <th>Нэр</th>
+                    <th>Зураг</th>
+                    <th>Идэвхтэй эсэх</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for slide in smallSlider %}
+                    <tr>
+                        <td></td>
+                        <td hidden="hidden">{{ slide.id }}</td>
+                        <td>{{ slide.titleMN }}</td>
+                        <td>
+                            <img src="{{ asset('bundles/images/small/slider/'~slide.path) }}"
+                                 style="width: 300px; height: 200px;">
+                        </td>
+                        <form action="{{ path('admin_slider_small_update', {'id':slide.id }) }}" method="post">
+                            <td>
+                                <select class="form-control" id="active" name="active">
+                                    <option value="1" {% if slide.active == '1' %} selected="selected" {% endif %}>
+                                        Идэвхтэй
+                                    </option>
+                                    <option value="0" {% if slide.active == '0' %} selected="selected" {% endif %}>
+                                        Идэхгүй
+                                    </option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="submit" value="Засварлах" class="btn btn-primary btn-block">
+                            </td>
+                        </form>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var addSerialNumber = function () {
+            var i = 1
+            $('table tbody tr').each(function (index) {
+                $(this).find('td:nth-child(1)').html(index + 1);
+            });
+        };
+
+        addSerialNumber();
+    </script>
+{% endblock %}

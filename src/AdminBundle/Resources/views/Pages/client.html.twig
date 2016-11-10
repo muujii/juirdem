@@ -1,0 +1,66 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <h3>Хэрэглэгчдийн бүртгэл</h3>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table" id="example">
+                <thead>
+                <tr>
+                    <th>Д/д</th>
+                    <th>Байгууллагын нэр</th>
+                    <th>Албан тушаал</th>
+                    <th>Нэр</th>
+                    <th>И-Мэйл</th>
+                    <th>Утас</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for client in clients %}
+                    <tr>
+                        {% if client.active == '1' %}
+                            <td style="background-color: #4cae4c" class="something" id="box"></td>
+                            <td hidden="hidden">{{ client.id }}</td>
+                            <td style="background-color: #4cae4c">{{ client.company }}</td>
+                            <td style="background-color: #4cae4c">{{ client.job }}</td>
+                            <td style="background-color: #4cae4c">{{ client.lastname }}</td>
+                            <td style="background-color: #4cae4c">{{ client.email }}</td>
+                            <td style="background-color: #4cae4c">{{ client.phone }}</td>
+                        {% elseif client.active == '0' %}
+                            <td class="something" id="box"></td>
+                            <td hidden="hidden">{{ client.id }}</td>
+                            <td>{{ client.company }}</td>
+                            <td>{{ client.job }}</td>
+                            <td>{{ client.lastname }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.phone }}</td>
+                        {% endif %}
+                        <td>
+                            <a href="{{ path('admin_client_edit_show', {'id': client.id }) }}"
+                               class="glyphicon glyphicon-pencil btn btn-primary"></a>
+                            <a href="{{ path('admin_client_delete', {'id': client.id }) }}"
+                               class="glyphicon glyphicon-trash btn btn-danger"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        var addSerialNumber = function () {
+            var i = 1
+            $('table tbody tr').each(function (index) {
+                $(this).find('td:nth-child(1)').html(index + 1);
+            });
+        };
+
+        addSerialNumber();
+    </script>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <h3>Бүтээгдэхүүн нийлүүлэгчдийн бүртгэл</h3>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#menu1">Бүтээгдэхүүн нийлүүлэгчийг бүртгэх</a></li>
+                <li><a data-toggle="tab" href="#menu2">Системд бүртгэлтэй бүтээгдэхүүн нийлүүлэгчийн жагсаалт</a></li>
+            </ul>
+            <div class="tab-content" style="margin-top: 50px;">
+                <div id="menu1" class="tab-pane fade in active">
+                    {{ form_start(form) }}
+                    {{ form_widget(form.company) }}
+                    {{ form_widget(form.name) }}
+                    {{ form_widget(form.register) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_widget(form.phone) }}
+                    {{ form_widget(form.address) }}
+                    {{ form_widget(form.type) }}
+                    {{ form_widget(form.vat) }}
+                    {{ form_widget(form.save) }}
+                    {{ form_end(form) }}
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Д/д</th>
+                            <th>Байгууллагын нэр</th>
+                            <th>ТТД</th>
+                            <th>Нэр</th>
+                            <th>И-Мэйл</th>
+                            <th>Утасны дугаар</th>
+                            <th>Төлөв</th>
+                            <th>Татвар</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for consigner in consigners %}
+                            <tr>
+                                <td></td>
+                                <td hidden="hidden">{{ consigner.id }}</td>
+                                <td>{{ consigner.company }}</td>
+                                <td>{{ consigner.register }}</td>
+                                <td>{{ consigner.name }}</td>
+                                <td>{{ consigner.email }}</td>
+                                <td>{{ consigner.phone }}</td>
+                                <td>{{ consigner.type }}</td>
+                                <td>{{ consigner.vat }}</td>
+                                <td>
+                                    <a href="{{ path('admin_consigner_edit_show', {'id': consigner.id }) }}"
+                                       class="glyphicon glyphicon-pencil btn btn-primary"></a>
+                                    <a href="{{ path('admin_consigner_delete', {'id': consigner.id }) }}"
+                                       class="glyphicon glyphicon-trash btn btn-danger"></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var addSerialNumber = function () {
+            var i = 1
+            $('table tbody tr').each(function(index) {
+                $(this).find('td:nth-child(1)').html(index+1);
+            });
+        };
+
+        addSerialNumber();
+    </script>
+{% endblock %}

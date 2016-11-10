@@ -1,0 +1,116 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <h3>Нийлүүлэгчийн дэлгэрэнгүй мэдээлэл</h3>
+                <hr>
+            </div>
+        </div>
+        <form action="{{ path('admin_consigner_edit',{'id': cons.con.id }) }}" method="post">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Байгууллагын нэр</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" id="company" name="company" class="form-control"
+                               value="{{ cons.con.company }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>ТТД</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" id="register" name="register" class="form-control"
+                               value="{{ cons.con.register }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Нэр</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" class="form-control" value="{{ cons.con.name }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>И-Мэйл</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" id="email" name="email" class="form-control" value="{{ cons.con.email }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Утасны дугаар</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" id="phone" name="phone" class="form-control" value="{{ cons.con.phone }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Хаяг</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <textarea rows="3" id="address" name="address"
+                                  class="form-control">{{ cons.con.address }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Төрөл</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <select class="form-control" name="type" id="type">
+                            <option value="Бөөний бүтээгдэхүүн" {% if cons.con.type == 'Бөөний бүтээгдэхүүн' %} selected="selected" {% endif %}>
+                                Бөөний бүтээгдэхүүн
+                            </option>
+                            <option value="Жижиглэнгийн бүтээгдэхүүн" {% if cons.con.type == 'Жижиглэнгийн бүтээгдэхүүн' %} selected="selected" {% endif %}>
+                                Жижиглэнгийн бүтээгдэхүүн
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Татвар</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <select class="form-control" id="vat" name="vat">
+                            <option value="НӨАТ-тэй" {% if cons.con.vat == 'НӨАТ-тэй' %} selected="selected" {% endif %}>
+                                НӨАТ-тэй
+                            </option>
+                            <option value="НӨАТ-гүй" {% if cons.con.vat == 'НӨАТ-гүй' %} selected="selected" {% endif %}>
+                                НӨАТ-гүй
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Хадгалах">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

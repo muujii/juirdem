@@ -1,0 +1,73 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-lg-12 text-right">
+                <h3>Sub меню засварлах</h3>
+                <hr class="star-light">
+            </div>
+        </div>
+        <form action="{{ path('admin_menu_sub_update',{'id': subMenus.subMenu.id}) }}" method="post">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Sub menu нэр</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ subMenus.subMenu.labelMN }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Parent menu </label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <select class="form-control" id="parent" name="parent">
+                            <option>Parent menu нэр</option>
+                            {% for parentMenu in parentMenus %}
+                                <option value="{{ parentMenu.id }}" {% if parentMenu.id == subMenus.subMenu.parentID %} selected="selected" {% endif %}>
+                                    {{ parentMenu.labelMN }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Холбоос</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="link" name="link" value="{{ subMenus.subMenu.link }}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Төлөв</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <select class="form-control" id="subActive" name="subActive">
+                            <option value="1" {% if subMenus.subMenu.active == '1' %} selected="selected" {% endif %}>
+                                Идэвхтэй
+                            </option>
+                            <option value="0" {% if subMenus.subMenu.active == '0' %} selected="selected" {% endif %}>
+                                Идэхгүй
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Хадгалах">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

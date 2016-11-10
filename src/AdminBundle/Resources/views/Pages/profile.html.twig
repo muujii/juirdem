@@ -1,0 +1,135 @@
+{% extends 'AdminBundle:Default:template.html.twig' %}
+
+{% block body %}
+    <div class="container" style="margin-top: 50px;">
+    <div class="row">
+        <div class="col-lg-12 text-right">
+            <h3>Өөрийн мэдээлэл</h3>
+            <hr class="star-light">
+        </div>
+    </div>
+    <div class="row text-right">
+        <div class="col-lg-12 text-right">
+            <button class="btn btn-primary" id="edit" name="edit" onclick="myEdit()">Засварлах</button>
+            <hr class="star-light">
+        </div>
+    </div>
+    <form action="{{ path('admin_profile_edit', {'id': profiles.profile.id }) }}" method="POST">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="text-center">
+                    <div class="imageUploadedOrNot">
+                        {% if profiles.profile.path is null %}
+                            <img src="{{ asset('http://placehold.it/300x300') }}" id="blankImg" alt=""
+                                 class="img-circle center-block"
+                                 style="width: 300px;height: 300px;" output="/example/example.png">
+                        {% else %}
+                            <img src="{{ asset( 'bundles/images/avatars/'~profiles.profile.path ) }}" id="blankImg"
+                                 alt="{{ profiles.profile.path }}"
+                                 class="img-circle center-block"
+                                 style="width: 300px;height: 300px;" output="/example/example.png">
+                        {% endif %}
+                    </div>
+                    <input type="file" disabled="disabled" class="text-center center-block well well-sm"
+                           style="margin-top: 15px;" id="file"
+                           name="file">
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                <div class="row">
+                    <div class="col-md-4 text-left"><label>Хэрэглэгчийн нэр</label></div>
+                    <div class="col-md-4">
+                        <input type="text" value="{{ profiles.profile.name }}"
+                               class="form-control"
+                               style="margin-bottom: 15px;" disabled="disabled" id="name" ,
+                               name="name"></div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-left"><label>И-Мэйл</label></div>
+                    <div class="col-md-4"><input type="text" value="{{ profiles.profile.email }}"
+                                                 class="form-control"
+                                                 style="margin-bottom: 15px;" disabled="disabled" id="email"
+                                                 name="email"></div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 text-left"><label>Утасны дугаар</label></div>
+                    <div class="col-md-4"><input type="text" value="{{ profiles.profile.phone }}"
+                                                 class="form-control"
+                                                 style="margin-bottom: 15px;" disabled="disabled" id="phone"
+                                                 name="phone"></div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-left"><label>Нууц үг</label></div>
+                    <div class="col-md-4"><input type="password"
+                                                 value="{{ profiles.profile.password }}"
+                                                 class="form-control"
+                                                 style="margin-bottom: 15px;" disabled="disabled"
+                                                 id="psw"></div>
+                    <div class="col-md-4">
+                        <input type="button" class="btn btn-primary btn-block" disabled="disabled" id="pswEdit"
+                               onclick="myPswShow()" value="Нууц үг солих">
+                    </div>
+                </div>
+                <div class="row hidden" id="hi1">
+                    <div class="col-md-4 text-left"></div>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" style="margin-bottom: 15px;" id="new_psw"
+                               placeholder="Нууц үг" name="new_psw">
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="row hidden" id="hi2">
+                    <div class="col-md-4 text-left"></div>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" style="margin-bottom: 15px;" id="new_rePsw"
+                               placeholder="Нууц үг давтах" name="new_rePsw">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" class="btn btn-primary btn-block" onclick="myPswHidden()" value="Болих">
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" class="btn btn-primary btn-block" disabled="disabled" id="save"
+                           value="Хадгалах">
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="{{ asset('bundles/js/jquery.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#file").change(function () {
+                var reader = new FileReader();
+                reader.onload = function (image) {
+                    $('.imageUploadedOrNot').show(0);
+                    $('#blankImg').attr('src', image.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+
+        function myEdit() {
+            document.getElementById("file").disabled = false;
+            document.getElementById("name").disabled = false;
+            document.getElementById("email").disabled = false;
+            document.getElementById("phone").disabled = false;
+            document.getElementById("save").disabled = false;
+            document.getElementById("pswEdit").disabled = false;
+        }
+
+        function myPswShow() {
+            $("#hi1").removeClass('hidden');
+            $("#hi2").removeClass('hidden');
+        }
+
+        function myPswHidden() {
+            $("#hi1").addClass('hidden');
+            $("#hi2").addClass('hidden');
+        }
+    </script>
+{% endblock %}
