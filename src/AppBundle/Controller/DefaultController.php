@@ -17,7 +17,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-		try{
+		//try{
 		// 1) form байгуулна.
         $client = new ClientRegister();
 		$form = $this->createForm(ClientRegisterType::class, $client);
@@ -49,10 +49,10 @@ class DefaultController extends Controller
 			}
 			$this->addFlash("notice", "Бид таны хүсэлтийг хүлээн авлаа эргэн холбогдох болно. Таньд баярлалаа.");
 		return $this->render('default/index.html.twig', array('form'=>$form->createView()));
-		}
-		catch(Exception $e){
-			echo $e;
-		}
+		//}
+		//catch(Exception $e){
+		//	echo $e;
+		//}
     }
 
 	/**
